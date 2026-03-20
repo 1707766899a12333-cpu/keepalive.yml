@@ -10,12 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write
     steps:
       - uses: actions/checkout@v4
       - name: Keepalive Action
         uses: gautamkrishnar/keepalive-workflow@v2
         with:
-          use_api: true
-          # 显式使用默认 Token 确保权限生效
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          use_api: false # 关键：关闭 API，改为直接提交代码
