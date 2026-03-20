@@ -12,7 +12,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Keepalive Action
-        uses: gautamkrishnar/keepalive-workflow@v2
-        with:
-          use_api: false # 关键：关闭 API，改为直接提交代码
+      - name: Manual Keepalive
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          date > keepalive.txt
+          git add keepalive.txt
+          git commit -m "Keepalive: $(date)" || exit 0
+          git push
